@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Factorial Calculator</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+  <div class="bg-white shadow-xl p-8 rounded-2xl w-full max-w-md">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Factorial Calculator</h1>
+
+    <input 
+      type="number" 
+      id="numberInput" 
+      placeholder="Enter a non-negative number" 
+      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 mb-4"
+    />
+
+    <button 
+      id="calculateBtn" 
+      class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors"
+    >
+      Calculate Factorial
+    </button>
+
+    <div id="result" class="mt-6 text-center text-lg text-gray-700 font-semibold"></div>
+  </div>
+
+  <script>
+    // Recursive factorial function
+    function factorial(n) {
+      if (n === 0 || n === 1) return 1;
+      return n * factorial(n - 1);
+    }
+
+    // Attach event after DOM is loaded
+    document.addEventListener("DOMContentLoaded", () => {
+      document.getElementById("calculateBtn").addEventListener("click", () => {
+        const input = document.getElementById("numberInput").value;
+        const number = parseInt(input);
+        const resultDiv = document.getElementById("result");
+
+        if (isNaN(number) || number < 0) {
+          resultDiv.textContent = "Please enter a valid non-negative number.";
+          resultDiv.classList.remove("text-green-600");
+          resultDiv.classList.add("text-red-600");
+        } else {
+          const result = factorial(number);
+          resultDiv.textContent = `Factorial of ${number} is ${result}`;
+          resultDiv.classList.remove("text-red-600");
+          resultDiv.classList.add("text-green-600");
+        }
+      });
+    });
+  </script>
+</body>
+</html>
